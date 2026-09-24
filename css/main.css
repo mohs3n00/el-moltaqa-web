@@ -1,0 +1,386 @@
+/* ==========================================================================
+   MOLTACA ELAZHAR — Official Community Website
+   Design System: Google Material 3 + Editorial / Institutional Aesthetics
+   Direction: RTL (Right to Left)
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&family=IBM+Plex+Sans+Arabic:wght@300;400;500;600;700&display=swap');
+
+:root {
+  /* Brand Color Tokens */
+  --color-primary: #0B0B0B;             /* Dominant Brand Black */
+  --color-primary-light: #1E1E1E;
+  --color-primary-container: #262626;
+  
+  --color-bg: #F7F7F5;                  /* Editorial Warm Off-White */
+  --color-surface: #FFFFFF;              /* Crisp White Surface */
+  --color-surface-container: #F1F1ED;   /* M3 Surface Container */
+  --color-surface-container-high: #EAEAE4;
+  --color-surface-dark: #121212;
+  --color-surface-dark-card: #1A1A1A;
+  
+  --color-secondary: #66734A;           /* Olive Green — Nature & Community */
+  --color-secondary-light: #7D8C5B;
+  --color-secondary-container: #E8EDE0; /* Tonal background for badges */
+  --color-secondary-dark: #4D5737;
+
+  --color-accent: #C6A15B;              /* Warm Gold — Milestones & Accents */
+  --color-accent-light: #FBF4E8;
+  --color-accent-dark: #9F7E3B;
+
+  /* Typography Colors */
+  --text-primary: #0F100D;
+  --text-secondary: #565851;
+  --text-tertiary: #84877D;
+  --text-inverse: #F7F7F5;
+  --text-inverse-muted: #B3B5AC;
+
+  /* Borders & Dividers */
+  --border-subtle: #E6E6DF;
+  --border-medium: #D0D0C7;
+  --border-dark: #2A2A28;
+
+  /* Material 3 Elevation & Shadows */
+  --shadow-xs: 0 1px 2px rgba(11, 11, 11, 0.04);
+  --shadow-sm: 0 2px 8px rgba(11, 11, 11, 0.06);
+  --shadow-md: 0 8px 24px rgba(11, 11, 11, 0.08);
+  --shadow-lg: 0 16px 40px rgba(11, 11, 11, 0.12);
+  --shadow-xl: 0 24px 60px rgba(11, 11, 11, 0.16);
+
+  /* Radii Scale */
+  --radius-xs: 4px;
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  /* Typography Scale */
+  --font-display: 'Cairo', system-ui, -apple-system, sans-serif;
+  --font-body: 'IBM Plex Sans Arabic', 'Cairo', system-ui, sans-serif;
+
+  /* Transitions */
+  --transition-fast: 160ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-normal: 280ms cubic-bezier(0.2, 0, 0, 1);
+  --transition-slow: 450ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  /* Layout Max-Width */
+  --container-max: 1280px;
+  --header-height: 80px;
+}
+
+/* CSS Reset & Core Elements */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.65;
+  scroll-behavior: smooth;
+  background-color: var(--color-bg);
+  color: var(--text-primary);
+  direction: rtl;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: var(--color-bg);
+  color: var(--text-primary);
+}
+
+::selection {
+  background-color: var(--color-secondary-container);
+  color: var(--color-secondary-dark);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  background: none;
+  cursor: pointer;
+  outline: none;
+}
+
+/* Typography Hierarchy */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.3;
+  color: var(--color-primary);
+  letter-spacing: -0.015em;
+}
+
+.display-title {
+  font-size: clamp(2.25rem, 5vw, 3.75rem);
+  font-weight: 900;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+}
+
+.section-title {
+  font-size: clamp(1.85rem, 3.5vw, 2.75rem);
+  font-weight: 800;
+  line-height: 1.25;
+  position: relative;
+}
+
+.section-subtitle {
+  font-size: 1.125rem;
+  color: var(--text-secondary);
+  max-width: 680px;
+  margin-top: 0.75rem;
+  line-height: 1.7;
+}
+
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--font-display);
+  font-size: 0.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+}
+
+.eyebrow::before {
+  content: "";
+  display: inline-block;
+  width: 18px;
+  height: 2px;
+  background-color: var(--color-secondary);
+  border-radius: var(--radius-full);
+}
+
+/* Layout Container */
+.container {
+  width: 100%;
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1.25rem, 3vw, 2.5rem);
+  padding-right: clamp(1.25rem, 3vw, 2.5rem);
+}
+
+.section {
+  padding-top: clamp(4.5rem, 8vw, 7.5rem);
+  padding-bottom: clamp(4.5rem, 8vw, 7.5rem);
+  position: relative;
+}
+
+.section-dark {
+  background-color: var(--color-primary);
+  color: var(--text-inverse);
+}
+
+.section-dark h1,
+.section-dark h2,
+.section-dark h3,
+.section-dark h4 {
+  color: #FFFFFF;
+}
+
+.section-dark .section-subtitle {
+  color: var(--text-inverse-muted);
+}
+
+.section-dark .eyebrow {
+  color: var(--color-accent);
+}
+
+.section-dark .eyebrow::before {
+  background-color: var(--color-accent);
+}
+
+/* Tonal Badges & Chips */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.35rem 0.85rem;
+  border-radius: var(--radius-full);
+  font-size: 0.8125rem;
+  font-weight: 600;
+  line-height: 1;
+}
+
+.badge-olive {
+  background-color: var(--color-secondary-container);
+  color: var(--color-secondary-dark);
+}
+
+.badge-gold {
+  background-color: var(--color-accent-light);
+  color: var(--color-accent-dark);
+}
+
+.badge-dark {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+}
+
+.badge-outline {
+  border: 1px solid var(--border-medium);
+  color: var(--text-secondary);
+}
+
+/* Material 3 Inspired Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.65rem;
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 600;
+  padding: 0.85rem 1.65rem;
+  border-radius: var(--radius-full);
+  transition: all var(--transition-normal);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+.btn-primary {
+  background-color: var(--color-primary);
+  color: #FFFFFF;
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-primary:hover {
+  background-color: var(--color-primary-light);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-2px);
+}
+
+.btn-secondary {
+  background-color: var(--color-secondary);
+  color: #FFFFFF;
+}
+
+.btn-secondary:hover {
+  background-color: var(--color-secondary-light);
+  box-shadow: var(--shadow-sm);
+  transform: translateY(-2px);
+}
+
+.btn-outline {
+  background-color: transparent;
+  color: var(--color-primary);
+  border: 1.5px solid var(--border-medium);
+}
+
+.btn-outline:hover {
+  border-color: var(--color-primary);
+  background-color: rgba(11, 11, 11, 0.03);
+}
+
+.btn-white {
+  background-color: #FFFFFF;
+  color: var(--color-primary);
+  box-shadow: var(--shadow-sm);
+}
+
+.btn-white:hover {
+  background-color: #F8F8F6;
+  transform: translateY(-2px);
+}
+
+.btn-white-outline {
+  background-color: transparent;
+  color: #FFFFFF;
+  border: 1.5px solid rgba(255, 255, 255, 0.3);
+}
+
+.btn-white-outline:hover {
+  border-color: #FFFFFF;
+  background-color: rgba(255, 255, 255, 0.08);
+}
+
+.btn-icon {
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border-radius: var(--radius-full);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Material 3 Card Bases */
+.m3-card {
+  background-color: var(--color-surface);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  transition: transform var(--transition-normal), box-shadow var(--transition-normal), border-color var(--transition-normal);
+}
+
+.m3-card:hover {
+  border-color: var(--border-medium);
+  box-shadow: var(--shadow-md);
+  transform: translateY(-4px);
+}
+
+/* Utilities */
+.text-center { text-align: center; }
+.text-gold { color: var(--color-accent); }
+.text-olive { color: var(--color-secondary); }
+.text-muted { color: var(--text-secondary); }
+
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.grid-cols-2 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+}
+
+.grid-cols-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+}
+
+.grid-cols-4 {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+@media (max-width: 1024px) {
+  .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 680px) {
+  .grid-cols-2, .grid-cols-3, .grid-cols-4 {
+    grid-template-columns: 1fr;
+  }
+}

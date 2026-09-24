@@ -1,0 +1,19 @@
+{
+  "name": "moltaca-elazhar-web",
+  "version": "1.0.0",
+  "description": "الموقع الرسمي لملتقى أبناء قصاصين الأزهار — Moltaca Elazhar Official Community Website",
+  "main": "index.html",
+  "scripts": {
+    "start": "npx -y serve . -p 3000",
+    "dev": "npx -y serve . -p 3000"
+  },
+  "keywords": [
+    "moltaca",
+    "elazhar",
+    "community",
+    "egypt",
+    "sharkia"
+  ],
+  "author": "Moltaca Elazhar Community",
+  "license": "MIT"
+}
