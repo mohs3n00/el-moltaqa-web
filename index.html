@@ -43,16 +43,65 @@
         </div>
       </a>
 
-      <!-- Desktop Nav -->
-      <nav aria-label="القائمة الرئيسية">
+      <!-- Desktop Compact Icon Nav -->
+      <nav class="site-nav" aria-label="القائمة الرئيسية">
         <ul class="nav-menu">
-          <li><a href="#home" class="nav-link active">الرئيسية</a></li>
-          <li><a href="#about" class="nav-link">عن الملتقى</a></li>
-          <li><a href="#activities" class="nav-link">الأنشطة المجتمعية</a></li>
-          <li><a href="#stories" class="nav-link">قصص المجتمع</a></li>
-          <li><a href="#media" class="nav-link">في الإعلام</a></li>
-          <li><a href="#archive" class="nav-link">الأرشيف المرئي</a></li>
-          <li><a href="#community" class="nav-link">قنوات التواصل</a></li>
+          <li>
+            <a href="#home" class="nav-link active" aria-label="الرئيسية">
+              <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+              </svg>
+              <span class="nav-tooltip" role="tooltip">الرئيسية</span>
+            </a>
+          </li>
+          <li>
+            <a href="#about" class="nav-link" aria-label="عن الملتقى">
+              <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+              </svg>
+              <span class="nav-tooltip" role="tooltip">عن الملتقى</span>
+            </a>
+          </li>
+          <li>
+            <a href="#activities" class="nav-link" aria-label="الأنشطة المجتمعية">
+              <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+              </svg>
+              <span class="nav-tooltip" role="tooltip">الأنشطة المجتمعية</span>
+            </a>
+          </li>
+          <li>
+            <a href="#stories" class="nav-link" aria-label="قصص المجتمع">
+              <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm-1 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
+              </svg>
+              <span class="nav-tooltip" role="tooltip">قصص المجتمع</span>
+            </a>
+          </li>
+          <li>
+            <a href="#media" class="nav-link" aria-label="في الإعلام">
+              <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-9 12H5v-2h6v2zm0-4H5v-2h6v2zm0-4H5V6h6v2zm8 8h-6V6h6v10z"/>
+              </svg>
+              <span class="nav-tooltip" role="tooltip">في الإعلام</span>
+            </a>
+          </li>
+          <li>
+            <a href="#archive" class="nav-link" aria-label="الأرشيف المرئي">
+              <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/>
+              </svg>
+              <span class="nav-tooltip" role="tooltip">الأرشيف المرئي</span>
+            </a>
+          </li>
+          <li>
+            <a href="#community" class="nav-link" aria-label="قنوات التواصل">
+              <svg class="nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+                <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+              </svg>
+              <span class="nav-tooltip" role="tooltip">قنوات التواصل</span>
+            </a>
+          </li>
         </ul>
       </nav>
 
@@ -91,13 +140,62 @@
         </button>
       </div>
       <ul class="mobile-nav-menu">
-        <li><a href="#home" class="mobile-nav-link">الرئيسية</a></li>
-        <li><a href="#about" class="mobile-nav-link">عن الملتقى</a></li>
-        <li><a href="#activities" class="mobile-nav-link">الأنشطة المجتمعية</a></li>
-        <li><a href="#stories" class="mobile-nav-link">قصص المجتمع</a></li>
-        <li><a href="#media" class="mobile-nav-link">في الإعلام</a></li>
-        <li><a href="#archive" class="mobile-nav-link">الأرشيف المرئي</a></li>
-        <li><a href="#community" class="mobile-nav-link">قنوات التواصل</a></li>
+        <li>
+          <a href="#home" class="mobile-nav-link active">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+            </svg>
+            <span>الرئيسية</span>
+          </a>
+        </li>
+        <li>
+          <a href="#about" class="mobile-nav-link">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-6h2v6zm0-8h-2V7h2v2z"/>
+            </svg>
+            <span>عن الملتقى</span>
+          </a>
+        </li>
+        <li>
+          <a href="#activities" class="mobile-nav-link">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5c-1.66 0-3 1.34-3 3s1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5C6.34 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+            </svg>
+            <span>الأنشطة المجتمعية</span>
+          </a>
+        </li>
+        <li>
+          <a href="#stories" class="mobile-nav-link">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M21 5c-1.11-.35-2.33-.5-3.5-.5-1.95 0-4.05.4-5.5 1.5-1.45-1.1-3.55-1.5-5.5-1.5S2.45 4.9 1 6v14.65c0 .25.25.5.5.5.1 0 .15-.05.25-.05C3.1 20.45 5.05 20 6.5 20c1.95 0 4.05.4 5.5 1.5 1.35-.85 3.8-1.5 5.5-1.5 1.65 0 3.35.3 4.75 1.05.1.05.15.05.25.05.25 0 .5-.25.5-.5V6c-.6-.45-1.25-.75-2-1zm-1 13.5c-1.1-.35-2.3-.5-3.5-.5-1.7 0-4.15.65-5.5 1.5V8c1.35-.85 3.8-1.5 5.5-1.5 1.2 0 2.4.15 3.5.5v11.5z"/>
+            </svg>
+            <span>قصص المجتمع</span>
+          </a>
+        </li>
+        <li>
+          <a href="#media" class="mobile-nav-link">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm-9 12H5v-2h6v2zm0-4H5v-2h6v2zm0-4H5V6h6v2zm8 8h-6V6h6v10z"/>
+            </svg>
+            <span>في الإعلام</span>
+          </a>
+        </li>
+        <li>
+          <a href="#archive" class="mobile-nav-link">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M22 16V4c0-1.1-.9-2-2-2H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2zm-11-4l2.03 2.71L16 11l4 5H8l3-4zM2 6v14c0 1.1.9 2 2 2h14v-2H4V6H2z"/>
+            </svg>
+            <span>الأرشيف المرئي</span>
+          </a>
+        </li>
+        <li>
+          <a href="#community" class="mobile-nav-link">
+            <svg class="mobile-nav-icon" viewBox="0 0 24 24" width="20" height="20" fill="currentColor" aria-hidden="true">
+              <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92 1.61 0 2.92-1.31 2.92-2.92s-1.31-2.92-2.92-2.92z"/>
+            </svg>
+            <span>قنوات التواصل</span>
+          </a>
+        </li>
       </ul>
     </div>
     <div style="padding-top: 1.5rem; border-top: 1px solid var(--border-subtle); display: flex; flex-direction: column; gap: 0.75rem;">

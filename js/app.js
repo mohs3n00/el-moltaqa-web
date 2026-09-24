@@ -60,14 +60,15 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // 2. Active ScrollSpy for Desktop Menu
+  // 2. Active ScrollSpy for Desktop & Mobile Menu
   function setupScrollSpy() {
     const sections = document.querySelectorAll('section[id]');
     const navLinks = document.querySelectorAll('.nav-link');
+    const mobileLinks = document.querySelectorAll('.mobile-nav-link');
 
-    window.addEventListener('scroll', () => {
-      let currentId = '';
-      const scrollPos = window.scrollY + 120;
+    function updateActiveNav() {
+      let currentId = 'home';
+      const scrollPos = window.scrollY + 140;
 
       sections.forEach(sec => {
         const top = sec.offsetTop;
@@ -77,12 +78,35 @@ document.addEventListener('DOMContentLoaded', () => {
         }
       });
 
+      // Special case: if scrolled near the bottom of the page, activate the last section
+      if ((window.innerHeight + window.scrollY) >= (document.documentElement.scrollHeight - 100)) {
+        currentId = 'community';
+      }
+
       navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === `#${currentId}`) {
+        const href = link.getAttribute('href');
+        if (href === `#${currentId}`) {
           link.classList.add('active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
         }
       });
-    }, { passive: true });
+
+      mobileLinks.forEach(link => {
+        const href = link.getAttribute('href');
+        if (href === `#${currentId}`) {
+          link.classList.add('active');
+          link.setAttribute('aria-current', 'page');
+        } else {
+          link.classList.remove('active');
+          link.removeAttribute('aria-current');
+        }
+      });
+    }
+
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    updateActiveNav();
   }
 });
