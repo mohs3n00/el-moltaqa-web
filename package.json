@@ -1,11 +1,15 @@
 {
-  "name": "moltaca-elazhar-web",
+  "name": "el-moltaqa-web",
   "version": "1.0.0",
   "description": "الموقع الرسمي لملتقى أبناء قصاصين الأزهار — Moltaca Elazhar Official Community Website",
   "main": "index.html",
   "scripts": {
     "start": "npx -y serve . -p 3000",
-    "dev": "npx -y serve . -p 3000"
+    "dev": "npx -y serve . -p 3000",
+    "deploy": "wrangler deploy"
+  },
+  "devDependencies": {
+    "wrangler": "^4.138.0"
   },
   "keywords": [
     "moltaca",

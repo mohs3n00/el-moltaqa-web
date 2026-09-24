@@ -1,0 +1,15 @@
+.git/
+.gitignore
+.assetsignore
+package.json
+package-lock.json
+node_modules/
+README.md
+contact_sheet.html
+assets/images/New folder/
+assets/images/awards_ceremony.jpg
+assets/images/hero_community.jpg
+assets/images/initiatives_solidarity.jpg
+assets/images/talents_arts.jpg
+assets/images/talents_poetry.jpg
+assets/images/village_heritage.jpg
