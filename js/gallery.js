@@ -10,10 +10,13 @@
   let currentPhotoIndex = 0;
   const archivePhotos = window.MOLTACA_ARCHIVE || [];
   const activities = window.MOLTACA_ACTIVITIES || [];
+  const initiatives = window.MOLTACA_INITIATIVES || [];
   const mediaItems = window.MOLTACA_MEDIA || [];
+  let activeLightboxPhotos = archivePhotos;
 
   function initArchive() {
     renderActivities();
+    renderInitiatives();
     renderMedia();
     renderArchivePhotos();
     setupLightbox();
@@ -49,6 +52,180 @@
         const id = btn.getAttribute('data-id');
         openActivityModal(id);
       });
+    });
+  }
+
+  // 1b. Render Field Initiatives Interactive Photo Carousels
+  function renderInitiatives() {
+    const grid = document.getElementById('initiatives-carousels-grid');
+    if (!grid || !initiatives.length) return;
+
+    grid.innerHTML = initiatives.map(init => {
+      const total = init.images.length;
+      return `
+        <article class="initiative-card" data-init-id="${init.id}">
+          <div class="initiative-carousel-wrap" id="carousel-${init.id}" data-active-index="0" data-total="${total}">
+            <div class="initiative-slides-stage">
+              ${init.images.map((img, i) => `
+                <div class="initiative-slide ${i === 0 ? 'active' : ''}" data-slide="${i}">
+                  <img src="${img.src}" alt="${img.alt}" class="initiative-slide-img" loading="lazy">
+                  <div class="initiative-zoom-hint" aria-hidden="true">
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                    <span>تكبير الصورة</span>
+                  </div>
+                </div>
+              `).join('')}
+            </div>
+
+            <!-- Top Overlays -->
+            <div class="initiative-top-meta">
+              <span class="badge badge-gold">${init.badge}</span>
+              <span class="initiative-counter-pill" id="counter-${init.id}">1 / ${total}</span>
+            </div>
+
+            <!-- Nav Arrows -->
+            <button type="button" class="initiative-arrow-btn initiative-prev" aria-label="الصورة السابقة" data-init-id="${init.id}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+            </button>
+            <button type="button" class="initiative-arrow-btn initiative-next" aria-label="الصورة التالية" data-init-id="${init.id}">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+            </button>
+
+            <!-- Dots -->
+            <div class="initiative-dots" id="dots-${init.id}">
+              ${init.images.map((_, i) => `
+                <button type="button" class="initiative-dot ${i === 0 ? 'active' : ''}" data-init-id="${init.id}" data-dot="${i}" aria-label="صورة ${i + 1}"></button>
+              `).join('')}
+            </div>
+          </div>
+
+          <div class="initiative-card-body">
+            <h4 class="initiative-title">${init.title}</h4>
+            <div class="initiative-subtitle">${init.subtitle}</div>
+            <div class="initiative-sponsor-pill">${init.sponsor}</div>
+            <p class="initiative-desc">${init.desc}</p>
+            <div class="initiative-footer">
+              <button type="button" class="btn btn-outline initiative-open-album-btn" data-init-id="${init.id}">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line><line x1="11" y1="8" x2="11" y2="14"></line><line x1="8" y1="11" x2="14" y2="11"></line></svg>
+                <span>استعراض الألبوم كاملاً (${total} صور)</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    setupInitiativesInteractivity(grid);
+  }
+
+  function setupInitiativesInteractivity(grid) {
+    initiatives.forEach(init => {
+      const carouselWrap = document.getElementById(`carousel-${init.id}`);
+      if (!carouselWrap) return;
+
+      const total = init.images.length;
+      let currentIndex = 0;
+
+      function goToSlide(idx) {
+        currentIndex = (idx + total) % total;
+        carouselWrap.setAttribute('data-active-index', currentIndex);
+
+        const slides = carouselWrap.querySelectorAll('.initiative-slide');
+        slides.forEach((s, i) => {
+          if (i === currentIndex) {
+            s.classList.add('active');
+          } else {
+            s.classList.remove('active');
+          }
+        });
+
+        const dots = carouselWrap.querySelectorAll('.initiative-dot');
+        dots.forEach((d, i) => {
+          if (i === currentIndex) {
+            d.classList.add('active');
+          } else {
+            d.classList.remove('active');
+          }
+        });
+
+        const counter = document.getElementById(`counter-${init.id}`);
+        if (counter) counter.textContent = `${currentIndex + 1} / ${total}`;
+      }
+
+      const prevBtn = carouselWrap.querySelector('.initiative-prev');
+      const nextBtn = carouselWrap.querySelector('.initiative-next');
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          goToSlide(currentIndex - 1);
+        });
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', (e) => {
+          e.stopPropagation();
+          goToSlide(currentIndex + 1);
+        });
+      }
+
+      const dots = carouselWrap.querySelectorAll('.initiative-dot');
+      dots.forEach(dot => {
+        dot.addEventListener('click', (e) => {
+          e.stopPropagation();
+          const targetIdx = parseInt(dot.getAttribute('data-dot'), 10);
+          goToSlide(targetIdx);
+        });
+      });
+
+      const stage = carouselWrap.querySelector('.initiative-slides-stage');
+      if (stage) {
+        let touchStartX = 0;
+        let touchStartY = 0;
+        stage.addEventListener('touchstart', (e) => {
+          if (e.touches && e.touches.length === 1) {
+            touchStartX = e.touches[0].screenX;
+            touchStartY = e.touches[0].screenY;
+          }
+        }, { passive: true });
+
+        stage.addEventListener('touchend', (e) => {
+          if (e.changedTouches && e.changedTouches.length === 1) {
+            const diffX = e.changedTouches[0].screenX - touchStartX;
+            const diffY = e.changedTouches[0].screenY - touchStartY;
+            if (Math.abs(diffX) > 40 && Math.abs(diffX) > Math.abs(diffY) * 1.4) {
+              if (diffX > 0) {
+                goToSlide(currentIndex - 1);
+              } else {
+                goToSlide(currentIndex + 1);
+              }
+            }
+          }
+        }, { passive: true });
+
+        stage.addEventListener('click', () => {
+          const photosForLightbox = init.images.map(img => ({
+            src: img.src,
+            title: init.title,
+            location: init.subtitle,
+            description: img.alt
+          }));
+          openLightbox(currentIndex, photosForLightbox);
+        });
+      }
+
+      const openAlbumBtn = grid.querySelector(`.initiative-open-album-btn[data-init-id="${init.id}"]`);
+      if (openAlbumBtn) {
+        openAlbumBtn.addEventListener('click', () => {
+          const photosForLightbox = init.images.map(img => ({
+            src: img.src,
+            title: init.title,
+            location: init.subtitle,
+            description: img.alt
+          }));
+          openLightbox(currentIndex, photosForLightbox);
+        });
+      }
     });
   }
 
@@ -122,8 +299,9 @@
   }
 
   // 4. Lightbox Logic
-  function openLightbox(index) {
-    if (!archivePhotos.length) return;
+  function openLightbox(index, customPhotos) {
+    activeLightboxPhotos = (customPhotos && customPhotos.length) ? customPhotos : archivePhotos;
+    if (!activeLightboxPhotos.length) return;
     currentPhotoIndex = index;
     const modal = document.getElementById('lightbox-modal');
     if (!modal) return;
@@ -141,7 +319,7 @@
   }
 
   function updateLightbox() {
-    const item = archivePhotos[currentPhotoIndex];
+    const item = activeLightboxPhotos[currentPhotoIndex];
     if (!item) return;
 
     const img = document.getElementById('lightbox-image');
@@ -150,20 +328,20 @@
     const counter = document.getElementById('lightbox-counter');
 
     if (img) img.src = item.src;
-    if (title) title.textContent = `${item.title} — ${item.location}`;
-    if (desc) desc.textContent = item.description || '';
-    if (counter) counter.textContent = `صورة ${currentPhotoIndex + 1} من ${archivePhotos.length}`;
+    if (title) title.textContent = item.location ? `${item.title} — ${item.location}` : item.title;
+    if (desc) desc.textContent = item.description || item.alt || '';
+    if (counter) counter.textContent = `صورة ${currentPhotoIndex + 1} من ${activeLightboxPhotos.length}`;
   }
 
   function nextPhoto() {
-    if (!archivePhotos.length) return;
-    currentPhotoIndex = (currentPhotoIndex + 1) % archivePhotos.length;
+    if (!activeLightboxPhotos.length) return;
+    currentPhotoIndex = (currentPhotoIndex + 1) % activeLightboxPhotos.length;
     updateLightbox();
   }
 
   function prevPhoto() {
-    if (!archivePhotos.length) return;
-    currentPhotoIndex = (currentPhotoIndex - 1 + archivePhotos.length) % archivePhotos.length;
+    if (!activeLightboxPhotos.length) return;
+    currentPhotoIndex = (currentPhotoIndex - 1 + activeLightboxPhotos.length) % activeLightboxPhotos.length;
     updateLightbox();
   }
 
@@ -177,10 +355,38 @@
     if (prevBtn) prevBtn.addEventListener('click', prevPhoto);
     if (nextBtn) nextBtn.addEventListener('click', nextPhoto);
 
+    let touchStartX = 0;
+    let touchEndX = 0;
+    let touchStartY = 0;
+    let touchEndY = 0;
+
     if (modal) {
       modal.addEventListener('click', (e) => {
         if (e.target === modal) closeLightbox();
       });
+
+      modal.addEventListener('touchstart', (e) => {
+        if (e.touches && e.touches.length === 1) {
+          touchStartX = e.touches[0].screenX;
+          touchStartY = e.touches[0].screenY;
+        }
+      }, { passive: true });
+
+      modal.addEventListener('touchend', (e) => {
+        if (e.changedTouches && e.changedTouches.length === 1) {
+          touchEndX = e.changedTouches[0].screenX;
+          touchEndY = e.changedTouches[0].screenY;
+          const diffX = touchEndX - touchStartX;
+          const diffY = touchEndY - touchStartY;
+          if (Math.abs(diffX) > 45 && Math.abs(diffX) > Math.abs(diffY) * 1.5) {
+            if (diffX > 0) {
+              prevPhoto();
+            } else {
+              nextPhoto();
+            }
+          }
+        }
+      }, { passive: true });
     }
 
     document.addEventListener('keydown', (e) => {
